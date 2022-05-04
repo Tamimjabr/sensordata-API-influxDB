@@ -1,5 +1,5 @@
 {
-  "name": "planetwatcher-backend",
+  "name": "sensordata-API",
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
@@ -12,11 +12,11 @@
   "author": "Tamim Jabr",
   "license": "ISC",
   "dependencies": {
+    "@influxdata/influxdb-client": "^1.25.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^4.6.0",
     "http-errors": "^1.7.2",
-    "mongoose": "^6.0.12",
     "morgan": "^1.10.0",
     "node-fetch": "^3.0.0"
   },
