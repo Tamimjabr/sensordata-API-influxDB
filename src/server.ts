@@ -1,4 +1,3 @@
-import influxDB from './config/influxDB';
 import { errorMiddleware } from './middlewares/error-middleware';
 import express, { Application } from 'express'
 import helmet from 'helmet'
@@ -9,9 +8,8 @@ import { router } from './routes/router';
 
 
 
+
 const main = async () => {
-  const client = influxDB.getInstance()
-  console.log(client)
   const app: Application = express()
 
   // Security

@@ -1,7 +1,6 @@
 
 import { InfluxDB } from "@influxdata/influxdb-client"
 
-
 class InfluxDBClient {
   private token: string
   private INFLUXDB_URL: string

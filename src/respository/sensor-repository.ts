@@ -15,17 +15,7 @@ export const saveSensorData = async () => {
       .intField('field1', i)
 
     await writeClient.writePoint(point)
-
-
-
-    await writeClient.flush().then(() => {
-      console.log('WRITE FINISHED')
-    }).catch((err: any) => {
-
-      console.log('WRITE ERROR', err)
-      throw new Error('wtf')
-    })
-
+    const response = await writeClient.flush()
   }
 
 }
