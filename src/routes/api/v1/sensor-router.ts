@@ -8,3 +8,7 @@ const controller = new SensorController()
 router.get('/', (req: Request, res: Response, next: NextFunction) => {
   controller.getAll(req, res, next)
 })
+
+router.post('/', (req: Request, res: Response, next: NextFunction) => {
+  controller.getWebhook(req, res, next)
+})

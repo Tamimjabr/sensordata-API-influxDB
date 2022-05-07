@@ -23,4 +23,19 @@ export class SensorController {
     }
   }
 
+  async getWebhook (req: Request, res: Response, next: NextFunction) {
+    try {
+      console.log('got sensor data webhook')
+      console.log(req.body)
+      res.status(200).send({
+        status: 'success webhook',
+      })
+    } catch (error: any) {
+      if (error.code === 'ENOTFOUND') {
+        error = createError(404, 'Not Found')
+      }
+      next(error)
+    }
+  }
+
 }
