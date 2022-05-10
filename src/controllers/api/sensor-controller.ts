@@ -23,10 +23,11 @@ export class SensorController {
     }
   }
 
-  async getWebhook (req: Request, res: Response, next: NextFunction) {
+  async receiveWebhook (req: Request, res: Response, next: NextFunction) {
     try {
       console.log('got sensor data webhook')
       console.log(req.body)
+
       res.status(200).send({
         status: 'success webhook',
       })
@@ -37,5 +38,4 @@ export class SensorController {
       next(error)
     }
   }
-
 }
