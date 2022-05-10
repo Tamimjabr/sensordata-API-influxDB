@@ -1,4 +1,3 @@
-
 import { InfluxDB } from "@influxdata/influxdb-client"
 
 class InfluxDBClient {

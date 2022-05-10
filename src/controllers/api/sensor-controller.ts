@@ -27,6 +27,12 @@ export class SensorController {
     try {
       console.log('got sensor data webhook')
       console.log(req.body)
+      const { deviceToken, signal, payload } = req.body
+      await saveSensorData(
+        deviceToken,
+        signal,
+        payload
+      )
 
       res.status(200).send({
         status: 'success webhook',

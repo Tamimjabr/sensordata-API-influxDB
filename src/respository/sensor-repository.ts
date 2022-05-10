@@ -1,23 +1,20 @@
 import { Point } from '@influxdata/influxdb-client';
+import moment from 'moment';
 import influxDB from "../config/influxDB"
 
 const client = influxDB.getInstance()
 let org = `tamimjabr1995@gmail.com`
-let bucket = `SensorData`
+let bucket = `MotionSensor`
 
-export const saveSensorData = async () => {
+export const saveSensorData = async (deviceToken: string, signal: string, payload: string) => {
 
+  //todo add the sensor token
   let writeClient = await client.getWriteApi(org, bucket, 'ns')
+  let point = new Point('motion')
+    .tag('sensor_id', deviceToken).floatField('value', signal).stringField('payload', payload)
 
-  for (let i = 0; i < 5; i++) {
-    let point = new Point('measurement2')
-      .tag('tagname1' + i, 'tagvalue1')
-      .intField('field1', i)
-
-    await writeClient.writePoint(point)
-    const response = await writeClient.flush()
-  }
-
+  await writeClient.writePoint(point)
+  const response = await writeClient.flush()
 }
 //  |> range(start: -30m)
 
@@ -26,11 +23,10 @@ export const getSensorData = async () => {
 
   const query = `option v = {timeRangeStart: -1h, timeRangeStop: now()}
   
-  from(bucket: "SensorData")
-  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)
-  |> filter(fn: (r) => r["_measurement"] == "measurement2")
-  |> filter(fn: (r) => r["_field"] == "field1")
-  |> filter(fn: (r) => r["tagname10"] == "tagvalue1")`
+  from(bucket: "MotionSensor")
+	|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
+  |> filter(fn: (r) => r["_measurement"] == "motion")
+  |> filter(fn: (r) => r["_field"] == "value")`
 
   return await queryApi.collectRows(query)
 }
