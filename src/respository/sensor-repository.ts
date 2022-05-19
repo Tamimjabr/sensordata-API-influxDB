@@ -16,12 +16,12 @@ export const saveSensorData = async (deviceToken: string, signal: string, payloa
   await writeClient.writePoint(point)
   const response = await writeClient.flush()
 }
-//  |> range(start: -30m)
+
 
 export const getSensorData = async () => {
   const queryApi = client.getQueryApi(org)
 
-  const query = `option v = {timeRangeStart: -1h, timeRangeStop: now()}
+  const query = `option v = {timeRangeStart: -30d, timeRangeStop: now()}
   
   from(bucket: "MotionSensor")
 	|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
