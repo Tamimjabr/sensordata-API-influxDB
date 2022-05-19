@@ -6,9 +6,6 @@ import logger from 'morgan'
 import { router } from './routes/router';
 
 
-
-
-
 const main = async () => {
   const app: Application = express()
 
@@ -34,7 +31,6 @@ const main = async () => {
     console.log('Press Ctrl-C to terminate...')
 
   })
-
 }
 
 main().catch(console.error)
