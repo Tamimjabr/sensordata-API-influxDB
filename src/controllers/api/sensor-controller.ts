@@ -8,7 +8,6 @@ export class SensorController {
   async getAll (req: Request, res: Response, next: NextFunction) {
     try {
       const data = await getSensorData()
-      console.log('inside controller')
       res.status(200).send({
         status: 'success',
         data

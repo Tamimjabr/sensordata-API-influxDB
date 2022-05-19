@@ -26,7 +26,8 @@ export const getSensorData = async () => {
   from(bucket: "MotionSensor")
 	|> range(start: v.timeRangeStart, stop: v.timeRangeStop)
   |> filter(fn: (r) => r["_measurement"] == "motion")
-  |> filter(fn: (r) => r["_field"] == "value")`
+  |> filter(fn: (r) => r["_field"] == "value")
+  |> filter(fn: (r) => r["sensor_id"] == "a54e105d-4c8e-4e2a-9ce8-bf31b6299aab")`
 
   return await queryApi.collectRows(query)
 }
