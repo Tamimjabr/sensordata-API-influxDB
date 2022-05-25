@@ -21,9 +21,14 @@ export class SensorController {
 
   async receiveWebhook (req: Request, res: Response, next: NextFunction) {
     try {
-      console.log('got sensor data webhook')
-      console.log(req.body)
+
       const { deviceToken, signal, payload } = req.body
+      
+      if (!deviceToken || !signal || !payload) {
+        next(createError(400, 'Bad Request'))
+        return
+      }
+
       await saveSensorData(
         deviceToken,
         signal,
