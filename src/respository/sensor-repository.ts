@@ -2,18 +2,16 @@ import { Point } from '@influxdata/influxdb-client';
 import influxDB from "../config/influxDB"
 
 const client = influxDB.getInstance()
-let org = `tamimjabr1995@gmail.com`
-let bucket = `MotionSensor`
+const org = process.env.INFLUXDB_ORG
+const bucket = `MotionSensor`
 
 export const saveSensorData = async (deviceToken: string, signal: string, payload: string) => {
-
-  //todo add the sensor token
   let writeClient = await client.getWriteApi(org, bucket, 'ns')
   let point = new Point('motion')
     .tag('sensor_id', deviceToken).floatField('value', signal).stringField('payload', payload)
 
   await writeClient.writePoint(point)
-  const response = await writeClient.flush()
+  await writeClient.flush()
 }
 
 
