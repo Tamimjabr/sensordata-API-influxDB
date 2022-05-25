@@ -2,7 +2,6 @@ import createError from 'http-errors';
 import { NextFunction, Request, Response } from 'express';
 import { getSensorData, saveSensorData } from '../../respository/sensor-repository';
 
-
 export class SensorController {
 
   async getAll (req: Request, res: Response, next: NextFunction) {

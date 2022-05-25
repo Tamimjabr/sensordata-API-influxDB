@@ -1,5 +1,4 @@
 import { Point } from '@influxdata/influxdb-client';
-import moment from 'moment';
 import influxDB from "../config/influxDB"
 
 const client = influxDB.getInstance()
